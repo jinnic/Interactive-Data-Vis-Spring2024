@@ -18,3 +18,30 @@ h3 {
 p {
   font-size: 1em;
 }
+
+img {
+  width: 250px;
+}
+
+.petName{
+  font-style: italic;
+}
+.dog{
+  background-color: lightpink;
+}
+
+.wrapper{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.btn{
+  padding: 20px;
+  margin: 0 5px;
+  background-color: lightpink;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  /* color: white; */
+}

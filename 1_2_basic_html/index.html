@@ -7,13 +7,55 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <h1>Hello World!</h1>
+  <h1>Create a table and a SVG element</h1>
   <h3>Section 1 | Tutorial 2 | Basic HTML</h3>
   <table>
-    <!-- Add your table data here -->
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type of Pet</th>
+        <th>Picture</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="petName">Alf</td>
+        <td class="dog">Dog</td>
+        <td>
+          <img src="https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*" />
+        </td>
+      </tr>
+      <tr>
+        <td class="petName">Babbles</td>
+        <td >Cat</td>
+        <td>
+          <img src="https://m.media-amazon.com/images/I/51qxya2OkvL._AC_UF350,350_QL80_.jpg" />
+        </td>
+      </tr>
+      <tr>
+        <td class="petName">Bingo</td>
+        <td class="dog">Dog</tdr>
+        <td>
+          <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b40bafe5-a885-4511-b63e-d723cccb7159/de1rdea-5e503d5e-5332-4a2b-8939-9602e2d33b66.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2I0MGJhZmU1LWE4ODUtNDUxMS1iNjNlLWQ3MjNjY2NiNzE1OVwvZGUxcmRlYS01ZTUwM2Q1ZS01MzMyLTRhMmItODkzOS05NjAyZTJkMzNiNjYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.mxO-q67ivTv4yeS605rmI-il4WH9wDJSrFLHMR3_61Q" />
+        </td>
+      </tr>
+      <tr>
+        <td class="petName">Gus</td>
+        <td class="petType">Fish</td>
+        <td>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Achoerodus_viridis.jpg/800px-Achoerodus_viridis.jpg" />
+        </td>
+      </tr>
+    </tbody>
   </table>
-  <svg>
-    <!-- Add your rectangles in here -->
-  </svg>
+  <div class="wrapper">
+    <button class="btn">Change color of the cross</button>
+    <svg >
+      <rect class="rect" x="0" width="50" height="50" rx="7" fill="purple" />
+      <path class="cross" d="M20 10 h10 v10 h10 v10 h-10 v10 h-10 v-10 h-10 v-10 h10 z" fill="yellow" />
+    </svg>
+  </div>
+    
+  <script src="main.js"></script>
 </body>
 </html>
