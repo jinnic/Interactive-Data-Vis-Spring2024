@@ -1,6 +1,7 @@
 ## :link: Assignment link
 
 [repository](https://github.com/jinnic/Interactive-Data-Vis-Spring2024/tree/main/1_1_getting_started)
+
 [deployed example](https://jinnic.github.io/Interactive-Data-Vis-Spring2024/1_1_getting_started/)
 
 # Section 1 | Tutorial 1 | Getting Started
