@@ -14,10 +14,29 @@ h3 {
 }
 
 p {
-  font-family: serif;
-  font-size: 1em;
+  /* font-family: serif; */
+  font-size: 1.5em;
 }
 
 section {
   padding: 2em 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+button {
+  width: 300px;
+  height: 200px;
+  margin-right: 50px;
+  font-size: 1em;
+  background-color: gold;
+  border: 2px dotted darkorange;
+}
+
+#counter {
+  color: red;
 }
