@@ -36,8 +36,8 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
       .attr("width", width)
       .attr("height", height)
       .style("overflow", "visible");
-    // Handmade legend
     
+    // Handmade legend
     //legend position 
     const dotCx = width-margin*3,
           dotCy = margin, 

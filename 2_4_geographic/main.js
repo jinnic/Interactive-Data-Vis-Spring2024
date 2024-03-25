@@ -1,6 +1,7 @@
 /* CONSTANTS AND GLOBALS */
 const width = window.innerWidth * 0.9,
-  height = window.innerHeight * 0.7;
+  height = window.innerHeight * 0.7,
+  margin = 20;
 /**
  * LOAD DATA
  * Using a Promise.all([]), we can load more than one dataset at a time
@@ -33,17 +34,27 @@ const width = window.innerWidth * 0.9,
   // DEFINE PATH FUNCTION
   const geoPathGen = d3.geoPath(projection);
 
-  //CREATE SCALE FOR COLO
+  //CREATE SCALE FOR COLOR
   // const colorScale = d3.scaleLinear()
   //   .domain([1, Math.max(...nationalities.map(d => d.Count))])
   //   .range(["white", "green"]);
   const colorScale = d3.scaleLog()
-    .domain([1, d3.max(nationalities, d => d.Count)])
-    .range(["lightgreen", "darkgreen"]) 
-    .base(2)
+    .domain([10, d3.max(nationalities, d => d.Count)])
+    .range(["lightblue", "red"]) 
+    //.base(2)
   
-    //console.log("max count", d3.max(nationalities, d => d.Count), "color", colorScale(5181))
-
+  //ADD LEGEND using Susie Lu's library
+  // https://d3-legend.susielu.com/
+  const legend = d3.legendColor()
+    .labelFormat(d3.format("d"))
+    .cells([10, 50, 100, 150, 200, 1000])
+    .scale(colorScale)
+    //.labels(d3.legendHelpers.thresholdLabels)
+    
+  svg.append("g")
+    .attr("transform", `translate(${margin}, 0)`)
+    .call(legend);
+  //console.log("max count", d3.max(nationalities, d => d.Count), "color", colorScale(5181))
   
   // APPEND GEOJSON PATH  
   svg.selectAll(".country")
@@ -64,6 +75,5 @@ const width = window.innerWidth * 0.9,
     .attr("d", d => geoPathGen(d));
 
   
-  // APPEND DATA AS SHAPE
-
+  
 });
