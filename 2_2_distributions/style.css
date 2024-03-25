@@ -17,3 +17,10 @@ h3 {
 p {
   font-size: 1em;
 }
+
+circle.circle{
+  stroke: gray;
+  opacity: 0.8;
+  isolation: isolate;
+  mix-blend-mode: luminosity;
+}
