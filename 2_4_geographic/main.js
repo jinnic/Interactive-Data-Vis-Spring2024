@@ -61,7 +61,7 @@ const width = window.innerWidth * 0.9,
     .data(geojson.features)
     .join("path")
     .attr("class", "country")
-    .attr("stroke", "lime")
+    .attr("stroke", "gray")
     .attr("fill", d => {
         //if country name from geojson matches country name in nationalities
         //return color by it's count using color scale
