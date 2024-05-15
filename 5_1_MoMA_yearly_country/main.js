@@ -1,7 +1,7 @@
 /**
  * Referance : 
- *  https://observablehq.com/@d3/horizontal-bar-chart/2
- *  https://d3-graph-gallery.com/graph/custom_color.html
+ *  https://observablehq.com/@d3/stacked-bar-chart/2?intent=fork
+ *  https://d3-graph-gallery.com/graph/barplot_stacked_basicWide.html
  */
 
 /* CONSTANTS AND GLOBALS */
