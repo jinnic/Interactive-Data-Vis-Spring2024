@@ -12,7 +12,7 @@ const margin = 70;
 /* LOAD DATA */
 d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType)
   .then(data => {
-    //console.log("data", data)
+    console.log("data", data)
 
     /** select/create SVG */
     const barChartVertical = d3.select("#container")
