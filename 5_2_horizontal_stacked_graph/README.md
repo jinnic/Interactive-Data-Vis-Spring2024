@@ -1,5 +1,5 @@
 # Horizontal Stacked Graph
-The goals for this tutorial are:
+The goals for this repository are:
 
 - to understand [stacks](https://d3js.org/d3-shape/stack) and use it with bar graph.
 - Convert vertical graph to horizontal graph diffrence between Simple Stacked Bar Graphs and 100% Stack Bar Graph (https://datavizcatalogue.com/methods/stacked_bar_graph.html).
