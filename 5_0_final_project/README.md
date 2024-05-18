@@ -2,7 +2,7 @@
 The goals for this tutorial are:
 
 - Creating a data visualization that gives your users the ability to explore or understand the MoMA collection dataset of artwork and artists. 
-- The data can be found on github here: [https://github.com/MuseumofModernArt/collection](https://github.com/MuseumofModernArt/collection.).
+- The data can be found on github here: [https://github.com/MuseumofModernArt/collection](https://github.com/MuseumofModernArt/collection).
 
 ## Deliverables 
 - Prospectus: cleaned and organized notes after ideation class session. 

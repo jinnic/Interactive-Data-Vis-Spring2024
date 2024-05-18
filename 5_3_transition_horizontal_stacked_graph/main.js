@@ -64,7 +64,9 @@ d3.csv('../data/MoMA-yearly-sample.csv', d3.autoType)
 
     /** x axis for Stacked bar chart - count of works */
     const xScale = d3.scaleLinear()
-      .domain([0, 1500])
+      .domain([0,  d3.max(stackedData, d => d3.max(d, d =>{ 
+        console.log("MAX",d, d[1]);
+        return d[1]}))])
       .range([margin, width - margin])
 
     const xAxis = d3.axisBottom(xScale).tickSizeOuter(0) 
@@ -138,89 +140,81 @@ d3.csv('../data/MoMA-yearly-sample.csv', d3.autoType)
     /** Select your container and append the visual elements to it */
     
     /** Draw vertical bar chart */
+
+    const drawStackedBarGraph = (svg, stackedData, xScale) => {
+      svg.selectAll(".bar")
+        .data(d => {
+          //console.log("stackedData", stackedData)
+          return stackedData
+        })
+        .join("g")
+          .attr("class", "bar")
+          .attr("fill",d => colorScale(d.key))
+          .attr("stroke", "grey")
+          .selectAll("rect")
+          // enter a second time = loop subgroup per subgroup to add all rectangles
+          .data(d => {
+            //console.log("data", d[0])
+            return d})
+          .join("rect")         
+            .attr("x", d => xScale(d[0]))
+            .attr("y", d => yScale(d.data.Year))
+            .attr("height", yScale.bandwidth())
+            .attr("width", d => xScale(d[1]) - xScale(d[0]))
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseleave", mouseleave)
+    }
+
     /** Stacked bar chart*/
-    barChartVertical.selectAll(".bar")
-    // Enter in the stack data = loop key per key = group per group
-    .data(d => stackedData)
-    .join("g")
-      .attr("class", "bar")
-      .attr("fill", d => colorScale(d.key))
-      .attr("stroke", "grey")
-      .selectAll("rect")
-      // enter a second time = loop subgroup per subgroup to add all rectangles
-      .data(d => {
-        //console.log("data", d)
-        return d})
-      .join("rect")
-        .attr("x", d => xScale(d[0]))
-        .attr("y", d => yScale(d.data.Year))
-        .attr("height", yScale.bandwidth())
-        .attr("width", d => xScale(d[1]) - xScale(d[0]))
-        .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseleave", mouseleave)
-
-    //X axis label
-    barChartVertical.append("text")
-      .attr("text-anchor", "end")
-      .attr("x", width - margin)
-      .attr("y", height - margin/2)
-      .text("Count");
-
-    //Y axis label
-    barChartVertical.append("text")
-      .attr("text-anchor", "end")
-      .attr("transform", "rotate(-90)")
-      .attr("x", -margin/3 )
-      .attr("y", 20 )
-      .text("Nationality");
-      
-    
+    drawStackedBarGraph(barChartVertical, stackedData, xScale);
     /** 100% Stacked bar chart, normalized */
+    //drawStackedBarGraph(barChartVerticalNormal, stackedDataNormal, xScaleNormal);
+    /** Stacked bar chart*/
 
-    barChartVerticalNormal.selectAll(".bar")
-    .data(d => {
-      //console.log("stackedDataNormal", stackedDataNormal)
-      return stackedDataNormal
-    })
-    .join("g")
-      .attr("class", "bar")
-      .attr("z-index", -100)
-      .attr("fill",d => colorScale(d.key))
-      .attr("stroke", "grey")
-      .selectAll("rect")
-      // enter a second time = loop subgroup per subgroup to add all rectangles
-      .data(d => {
-        //console.log("data", d[0])
-        return d})
-      .join("rect")
-        .attr("x", d => xScaleNormal(d[0]))
-        .attr("y", d => yScale(d.data.Year))
-        .attr("height", yScale.bandwidth())
 
-        .attr("width", d => xScaleNormal(d[1]) - xScaleNormal(d[0]))
-        .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseleave", mouseleave)
+    /** Add label to Axis */
+    const addLable = (svg) =>{
+      //xAxis
+      svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", width - margin)
+        .attr("y", height - margin/2)
+        .text("Count");
+      //yAxis
+      svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -margin/3 )
+        .attr("y", 20 )
+        .text("Nationality");
 
-    //X axis label
-    barChartVerticalNormal.append("text")
-      .attr("text-anchor", "end")
-      .attr("x", width - margin)
-      .attr("y", height - margin/2)
-      .text("Count");
+    }
 
-    //Y axis label
-    barChartVerticalNormal.append("text")
-      .attr("text-anchor", "end")
-      .attr("transform", "rotate(-90)")
-      .attr("x", -margin/3 )
-      .attr("y", 20 )
-      .text("Nationality");
-
-    /** Draw Axis */
+    /** Draw Axis & add lable */
     drawAxis(barChartVertical,xAxis,yAxis)
     drawAxis(barChartVerticalNormal,xAxisNormal,yAxis)
+
+    addLable(barChartVertical);
+    addLable(barChartVerticalNormal)
     
+    /**
+      Transition
+    */
+    const changeGraph = (e) =>{
+      console.log("transition button clicked!", e.target.id)
+      let button = e.target.id;
+      let data = button === "button1" ? stackedData : stackedDataNormal;
+      let x = button === "button1" ? xScale : xScaleNormal;
+      console.log(data)
+      drawStackedBarGraph(barChartVertical, data, x)
+        
+    }
+    
+    d3.select("#button1").on("click", changeGraph);
+    d3.select("#button2").on("click", changeGraph);
+
+    
+
   })
 
