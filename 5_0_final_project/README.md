@@ -5,8 +5,9 @@ The goals for this tutorial are:
 - The data can be found on github here: [https://github.com/MuseumofModernArt/collection](https://github.com/MuseumofModernArt/collection.).
 
 ## Deliverables 
-Prospectus: cleaned and organized notes after ideation class session. 
-Sketches: cleaned and organized drawings after prototyping class session.
+- Prospectus: cleaned and organized notes after ideation class session. 
+[link]{google_docs}https://docs.google.com/document/d/1Ez3hmKBeX4g0p80g8hMRCT1LuCFoGq1hU4lkTfxGhUQ/edit?usp=sharing{/google_docs}
+- Sketches: cleaned and organized drawings after prototyping class session.
 Final project: a live, working site with data visualizations that satisfy the project requirements.
 
 ## Requirements
