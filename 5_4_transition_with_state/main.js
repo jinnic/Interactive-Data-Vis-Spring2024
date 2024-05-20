@@ -10,7 +10,7 @@ const width = window.innerWidth * 0.8;
       barHeight = 50;
 
 let height = 0;
-let svg, xScale, yScale, colorScale, xAxis, yAxis;
+let svg, xScale, yScale, colorScale, xAxis, yAxis, gx;
 
 /* STATE */
 let state = {
@@ -128,13 +128,20 @@ const init = () => {
 
 /* DRAW */
 const draw = () => {
-  console.log("current selection is : ", state.selected)
   
+  // change data by selected dropdown value
   const data = state.selected === "count" ? state.stackData : state.normalizedData;
+  //update xScale
   xScale = d3.scaleLinear()
           .domain([0,  d3.max(data, d => d3.max(d, d => d[1]))])
           .range([margin, width - margin])
-  console.log("draw called", data)
+  xAxis = state.selected === "count" ? d3.axisBottom(xScale):d3.axisBottom(xScale).ticks(width/50, "%")
+
+  //transition() returns transition, read more here(https://observablehq.com/@d3/selection-join)
+  const t = svg.transition()
+        .duration(1000);
+
+  //update barGroup
   const barGroup = svg
       .selectAll(".barGroup")
       .data(d => {
@@ -150,30 +157,31 @@ const draw = () => {
           return d})
         .join(
           enter => enter.append("rect")
-            .attr("x", d => xScale(d[0]))
-            .attr("width", d => xScale(d[1]) - xScale(d[0]))
+            .attr("x", margin)
+            .attr("width", 0)
+            .call(sel => sel.transition(t)
+              .attr("x", d => xScale(d[0]))
+              .attr("width", d => xScale(d[1]) - xScale(d[0])))
             ,
           update => update
-            .call(sel => sel.transition()
-              .duration(1000)
+            .call(sel => sel.transition(t)
               .attr("x", d => xScale(d[0]))
               .attr("width", d => xScale(d[1]) - xScale(d[0]))
             ),
           exit => exit.remove()
         )  
-        //.attr("x", d => xScale(d[0]))
-        .attr("y", d => yScale(d.data.Year))
+          .attr("y", d => yScale(d.data.Year))
           .attr("class", "bar")     
           .attr("height", yScale.bandwidth())
-          
           .on("mouseover", mouseover)
           .on("mousemove", mousemove)
           .on("mouseleave", mouseleave)
+  
+          gx.transition(t)
+          .call(xAxis)
+        // .selectAll(".tick")
+        //   .delay((d, i) => i * 20);
 
-  
-  
-
-  
 }
 const drawAxis = (svg, xAxis, yAxis) => {
       
@@ -181,7 +189,7 @@ const drawAxis = (svg, xAxis, yAxis) => {
     .attr("transform", `translate(${margin}, 0)`)
     .call(yAxis)
 
-  svg.append("g")
+  gx = svg.append("g")
     .attr("transform", `translate(0, ${height - margin})`)
     .call(xAxis)
 }
